@@ -6,4 +6,6 @@ Esta aplicación esta basada en el esqueleto básico de slim.
   1. Tener Instalado Composer  
   https://getcomposer.org/
   2. Instalar slim-skeleton
-  composer create-project slim/slim-skeleton [my-app-name]
+  ```sh
+    composer create-project slim/slim-skeleton [my-app-name]
+  ```
