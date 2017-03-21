@@ -15,5 +15,14 @@ return [
             'path' => __DIR__ . '/../logs/app.log',
             'level' => \Monolog\Logger::DEBUG,
         ],
+
+        //configuracion del Token y la base de datos
+        'app_token_name'    => 'APP-TOKEN',
+        'connectionString'  =>[
+            'dns'   => 'mysql:host=localhost;dbname=gooMovil;charset=utf8',
+            'user'  =>  'root',
+            'pass'  =>  ''
+        ]
+
     ],
 ];
