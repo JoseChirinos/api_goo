@@ -9,8 +9,8 @@ Esta aplicación esta basada en el esqueleto básico de slim.
   ```sh
     composer create-project slim/slim-skeleton [my-app-name]
   ```
-  3. Instalar dependencias (FluentPdo, Json Web Token) con composer
-  Añadir las siguientes lineas al archivo composer.json
+  3. Instalar dependencias (FluentPdo, Json Web Token) con composer,
+  añadir las siguientes lineas al archivo composer.json
   ```sh
      "require": {
         "fpdo/fluentpdo": "1.1.*", //fluentPdo 
