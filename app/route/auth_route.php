@@ -12,7 +12,7 @@ $app->group('/auth/',function(){
 
 		return $res->withHeader('Content-type', 'aplication/json')
 				   ->write(
-				   		json_encode($this->model->auth->autenticar($parametros['correo'], $parametros['password']))
+				   		json_encode($this->model->Auth->autenticar($parametros['correo'], $parametros['password']))
 				   	);	
 	});
 	

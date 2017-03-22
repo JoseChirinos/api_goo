@@ -11,7 +11,7 @@ use App\Lib\Response,
 class  AuthModel
 {
 	private $db;
-	private $table = 'User';
+	private $table = 'user';
 	private $response;
 
 

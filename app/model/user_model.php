@@ -10,7 +10,7 @@ use App\Lib\Response;
 class  UserModel
 {
 	private $db;
-	private $table = 'User';
+	private $table = 'user';
 	private $response;
 
 
@@ -30,8 +30,9 @@ class  UserModel
 	}
 
 	//listar paginado
-	public function listar_paginado($l, $p){	
-		$p = $p*5;
+	//parametros de limite, pagina
+	public function paginated($l, $p){	
+		$p = $p*$l;
 		$data = $this->db->from($this->table)
 						 ->limit($l)
 						 ->offset($p)
@@ -50,15 +51,15 @@ class  UserModel
 		];				  						 
 	}
 	//obtener
-	public function obtener($id){
+	public function getUser($id){
 
 		return $data = $this->db->from($this->table, $id)
 								->fetch();  						 
 	}
 	//registrar
 
-	public function registrar($data){
-		$data['password'] = md5($data['password']);	
+	public function insert($data){
+		// $data['password'] = md5($data['password']);	
 
 		$this->db->insertInto($this->table, $data)
 				 ->execute();
@@ -66,7 +67,7 @@ class  UserModel
 		return $this->response->setResponse(true);		 
 	}
 	//actualizar
-	public function actualizar($data, $id){
+	public function update($data, $id){
 
 		if (isset($data['password'])) {
 			$data['password'] = md5($data['password']);
@@ -78,7 +79,7 @@ class  UserModel
 		return $this->response->setResponse(true);		 
 	}
 	//eliminar
-	public function eliminar($id){
+	public function delete($id){
 
 		$this->db->deleteFrom($this->table, $id)	
 				 ->execute();
