@@ -13,12 +13,12 @@ Esta aplicación esta basada en el esqueleto básico de slim.
   añadir las siguientes lineas al archivo composer.json
   ```sh
      "require": {
-        "fpdo/fluentpdo": "1.1.*", //fluentPdo 
+        "fpdo/fluentpdo": "1.1.*", //fluentPdo
         "firebase/php-jwt": "^4.0" //JWT
     }
   ```
-  4.Actualizar dependencias composer 
-  
+  4. Actualizar dependencias composer
+
  ```sh
     composer update
   ```
