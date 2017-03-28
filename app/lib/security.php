@@ -2,7 +2,7 @@
 namespace App\Lib;
 
 class Security{
-
+	
 	public function encriptar($string)
 	{
 		$key='042c76ee72648fd8c1841340da5b6da2';
@@ -29,4 +29,7 @@ class Security{
 		mcrypt_module_close($td);
 		return $decrypted;
 	}
+
+
+
 }

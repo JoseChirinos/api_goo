@@ -2,7 +2,8 @@
 
 namespace App\Model;
 
-use App\Lib\Response;
+use App\Lib\Response,
+	App\Lib\Security;
 
 /**
 * Modelo usuario
@@ -18,6 +19,7 @@ class  UserModel
 	public function __CONSTRUCT($db){
 		$this->db = $db;
 		$this->response = new Response();
+		$this->security = new Security();
 	}
 	//var $l => 'limit', $p => 'pagina'
 
@@ -59,7 +61,8 @@ class  UserModel
 	//registrar
 
 	public function insert($data){
-		// $data['password'] = md5($data['password']);	
+		// $data['password'] = md5($data['password']);
+		$data['password'] = $this->security->encriptar($data['password']);	
 
 		$this->db->insertInto($this->table, $data)
 				 ->execute();
@@ -70,7 +73,7 @@ class  UserModel
 	public function update($data, $id){
 
 		if (isset($data['password'])) {
-			$data['password'] = md5($data['password']);
+			$data['password'] = $this->security->encriptar($data['password']);	
 		}
 
 		$this->db->update($this->table, $data, $id)	
