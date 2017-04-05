@@ -16,11 +16,13 @@ class  UserModel
 
 
 
-	public function __CONSTRUCT($db){
-		$this->db = $db;
+	public function __CONSTRUCT($db, $db_pdo){
+		$this->db 		= $db;
+		$this->db_pdo   = $db_pdo;
 		$this->response = new Response();
 		$this->security = new Security();
 	}
+
 	//var $l => 'limit', $p => 'pagina'
 
 	//lista_total
@@ -28,7 +30,9 @@ class  UserModel
 
 		return $data = $this->db->from($this->table)
 						 ->orderBy('id DESC')
-						 ->fetchAll();  						 
+						 ->fetchAll();
+	//  return $data = $this->db_pdo->query('select * from '.$this->table)
+	//					 			->fetchAll();				   						 
 	}
 
 	//listar paginado
@@ -64,10 +68,23 @@ class  UserModel
 		// $data['password'] = md5($data['password']);
 		$data['password'] = $this->security->encriptar($data['password']);	
 
-		$this->db->insertInto($this->table, $data)
-				 ->execute();
+		//$this->db->insertInto($this->table, $data)
+		//		 ->execute();
+		$this->db_pdo->prepare(" CALL insertUser(	'".$data['name']."',
+													'".$data['last_name']."',
+													'".$data['email']."',
+													'".$data['password']."',
+													'".$data['level']."',
+													 ".$data['id_picture_user'].",
+													 ".$data['mode_online'].",
+													 '".$data['data_start']."',
+													 ".$data['status'].")")
+					  ->execute();
 
-		return $this->response->setResponse(true);		 
+		return $this->response->setResponse(true);
+		//  return $data = $this->db_pdo->query('select * from '.$this->table)
+		//					 			->fetchAll();
+		//call insertUser('Belen','Rodriguez Soliz','elenrodrigu@gmail.com','79302623','1',1,1,'2017-03-03 00:00:00',1);			 
 	}
 	//actualizar
 	public function update($data, $id){

@@ -28,12 +28,22 @@ $container['db'] = function ($c) {
 
 	return new FluentPDO($pdo);
 };
+$container['db_pdo'] = function ($c) {
+	$connectionString = $c->get('settings')['connectionString'];
+
+	$pdo = new PDO($connectionString['dns'],$connectionString['user'],$connectionString['pass'],array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+
+	return $pdo;
+};
 // Models
 
 $container['model']	= function($c){
 
 	return (object)[
-		'User'	=>	new App\Model\UserModel($c->db),
+		'User'	=>	new App\Model\UserModel($c->db,$c->db_pdo),
 		'Auth'	=>	new App\Model\AuthModel($c->db)
 	];
 };
